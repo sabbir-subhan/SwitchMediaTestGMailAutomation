@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -76,11 +77,32 @@ public class GMailSwitchMediaTest {
   public void testCaseOne() {
 	  //Starting Stop watch
 	  
-	  System.out.println("Test Case One with Thread Id:- "
-				+ Thread.currentThread().getId());
+	  //System.out.println("Test Case One with Thread Id:- "+ Thread.currentThread().getId());
+	  
+	  //Creating a Highlight  object
 	  HighlightElement highlight=new HighlightElement();
+	  
+	  
 	  //Enter Email address
 	  WebElement googleEmail=driver.findElement(By.xpath("//*[@id='identifierId']"));
+	  
+	  //Get the text in Email ID text box
+	  String googleEmailText=googleEmail.getAttribute("aria-label");
+	  
+	  
+	  //Assert if mail ID text box has this text Email or phone
+	  try{
+		  System.out.println(googleEmailText);
+		  Assert.assertTrue(googleEmailText.contains("Email or phone"));
+		  System.out.println("!----Assertion  for Email Input field validation is successful---!");
+		  
+	  }
+	  catch (AssertionError e){
+		  System.out.println("!----Start of Assertion Failed for Email Input field validation---!");
+			e.printStackTrace();	  		   
+		   	System.out.println("!----End of Assertion Failed for Email Input field validation---!");
+	  }
+	  
 	  highlight.highlightElement(driver, googleEmail);
 	  googleEmail.sendKeys(SignInEmail);
 	  
@@ -88,10 +110,21 @@ public class GMailSwitchMediaTest {
 	  WebElement googleNextButton=driver.findElement(By.xpath("//*[@id='identifierNext']/content/span"));
 	  highlight.highlightElement(driver, googleNextButton);
 	  
-	  
-	  //Verifying the existence of Gmail login button
+	  //Get the text in Next button
 	  String googleNextButtonText=googleNextButton.getText();
-	  System.out.println("Login button:"+googleNextButtonText);
+	  
+	//Assert if mail ID text box has this text Email or phone
+		try{
+				  System.out.println(googleNextButtonText);
+				  Assert.assertTrue(googleNextButtonText.contains("NEXT"));
+				  System.out.println("!----Assertion  for Next button validation is successful---!");
+				  
+		}
+		catch (AssertionError e){
+				  System.out.println("!----Start of Assertion Failed for Next button validation---!");
+					e.printStackTrace();	  		   
+				   	System.out.println("!----End of Assertion Failed for Next button validation---!");
+			}
 	  
 	  //Click Next
 	  googleNextButton.click();
@@ -102,8 +135,22 @@ public class GMailSwitchMediaTest {
 	  highlight.highlightElement(driver,googlePassword);
 	  
 	  //Verifying the existence of Gmail Password field 
-	  String googlePasswordText=googlePassword.getText();
-	  System.out.println("Password Text box:"+googlePasswordText);
+	  //Get the text in Email ID text box
+	  String googlePasswordText=googlePassword.getAttribute("aria-label");
+	  
+	  
+	  //Assert if mail ID text box has this text Email or phone
+	  try{
+		  System.out.println(googlePasswordText);
+		  Assert.assertTrue(googlePasswordText.contains("Enter your password"));
+		  System.out.println("!----Assertion  for Email Password field validation is successful---!");
+		  
+	  }
+	  catch (AssertionError e){
+		  System.out.println("!----Start of Assertion Failed for Email Password  field validation---!");
+			e.printStackTrace();	  		   
+		   	System.out.println("!----End of Assertion Failed for Email Password field validation---!");
+	  }
 	  
 	  //Enter Password
 	  googlePassword.sendKeys(SignInEmailPassword);
