@@ -19,7 +19,6 @@ import org.testng.annotations.BeforeClass;
 
 public class GMailSwitchMediaTest {
 	/*Please input variables to control the data of the test
-	 * 
 	 */
 	
 	//To enable video capturing of test execution set this variable to True
@@ -34,12 +33,14 @@ public class GMailSwitchMediaTest {
 	// Set your To email address that will receive the email
 	String ToEmailAddress="sabbir_ss@hotmail.com";
 		
+	/*----End of variable section----*/
 	
-	
-	//Global variables
+	//Creating Webdriver object
 	public WebDriver driver;
+	
 	//First we instantiate an object of CaptureVidep class
  	CaptureVideo captureTestExecution=new CaptureVideo();
+ 	
 	Instant start = Instant.now();
 
 	  @BeforeClass
@@ -48,7 +49,7 @@ public class GMailSwitchMediaTest {
 		  
 		 //Prints Out the Test Case Name in the console for debugging purpose
 		  String TestCaseName = this.getClass().getName();
-		  System.out.println("TEST CASE RUNNING :"+ TestCaseName);
+		  //System.out.println("TEST CASE RUNNING :"+ TestCaseName);
 		  
 		/*Now we pass TestCaseName as parameter. Please, note that video filed will be created 
 		under C:\\SeleniumScriptVideos\\ folder with File name like "TestVideo-TestCase-<TestCaseName>-DateTime-<currentDateTime>"*/ 
@@ -68,7 +69,7 @@ public class GMailSwitchMediaTest {
 		  driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 		  //Maximize browser window
 		  driver.manage().window().maximize();
-		  
+		  //go to GMail page
 		  driver.get("https://mail.google.com/");
 		  
 	  }
@@ -76,9 +77,7 @@ public class GMailSwitchMediaTest {
   @Test
   public void testCaseOne() {
 	  //Starting Stop watch
-	  
-	  //System.out.println("Test Case One with Thread Id:- "+ Thread.currentThread().getId());
-	  
+		  
 	  //Creating a Highlight  object
 	  HighlightElement highlight=new HighlightElement();
 	  
