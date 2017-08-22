@@ -1,0 +1,6 @@
+This is a quick Readme file about using this project
+First Clone this project using Eclipse and EGit pluggin.
+Ensure that Java and Maven is installed in the local system.
+Ensure TestNG plugin for Eclipse is installed 
+Open src/test/java/testScripts/GMailSwitchMediaTest.java and run the file using TestNG
+Run this file from Run As->JUnit Test

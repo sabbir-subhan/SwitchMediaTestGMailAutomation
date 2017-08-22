@@ -1,4 +1,4 @@
-package testPacage;
+package testScripts;
 
 import org.testng.annotations.Test;
 
