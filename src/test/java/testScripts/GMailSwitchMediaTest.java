@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import supportClasses.CaptureVideo;
 import supportClasses.HighlightElement;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;
@@ -49,12 +50,17 @@ public class GMailSwitchMediaTest {
 		  
 		 //Prints Out the Test Case Name in the console for debugging purpose
 		  String TestCaseName = this.getClass().getName();
+		 //find out working parent directory to save the Test Execution video
+		  String WorkingDirectory=System.getProperty("user.dir");
+		  //System.out.println("Working Directory = "+System.getProperty("user.dir"));
 		  //System.out.println("TEST CASE RUNNING :"+ TestCaseName);
+		  
+		  
 		  
 		/*Now we pass TestCaseName as parameter. Please, note that video filed will be created 
 		under C:\\SeleniumScriptVideos\\ folder with File name like "TestVideo-TestCase-<TestCaseName>-DateTime-<currentDateTime>"*/ 
 		  if(CaptureVideoEnabled){
-			  captureTestExecution.captureVideo(TestCaseName);
+			  captureTestExecution.captureVideo(TestCaseName,WorkingDirectory);
 			  // Start the capture of the video
 			  captureTestExecution.startVideo();
 		  	}
@@ -162,14 +168,8 @@ public class GMailSwitchMediaTest {
 	  
 	//Verifying the existence of Gmail Sign-in field 
 	  String googleSigninButtonText=googleSigninButton.getText();
-	  System.out.println("Sign in  button:"+googleSigninButtonText);
-	  
-
-	  
-	  
-	  //verify login is successful
-	  
-	  
+	  //System.out.println("Sign in  button:"+googleSigninButtonText);
+    
 	  //Find and Click on Compose button
 	  
 	  WebElement ComposeEmail=driver.findElement(By.xpath("//div[text()='COMPOSE']"));
@@ -202,9 +202,40 @@ public class GMailSwitchMediaTest {
 	  //file upload 
 	  WebElement FileUpload=driver.findElement(By.xpath("//div[@data-tooltip='Attach files']/div/div/div"));
 	  highlight.highlightElement(driver, FileUpload);
+	  //Click file upload button
+	  FileUpload.click();
 	  
-	  //To-do file up load
-	   //FileUpload.sendKeys("C:/Users/ssubhan/Downloads/1207b.png");
+	 
+	  
+	  //sleep
+	  try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		
+		e.printStackTrace();
+	}
+	  //file upload page  open
+	  /*------AutoIT script will handle window AutoMantion
+	   * https://www.autoitscript.com
+	   */
+	  try {
+		Runtime.getRuntime().exec("ChromeFileUploadAutoITScript.exe");
+	  } catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+		System.out.println("AutoIT Windows automtion failed");
+	}
+	  
+	  //sleep--wait for upload to finish
+	  try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+		
+		e.printStackTrace();
+	}
+	  
+	  
+	  
 	  
 	  //Find and enter email Send button and  click
 	  WebElement EmailSendButton=driver.findElement(By.xpath("//*[text()='Send']"));

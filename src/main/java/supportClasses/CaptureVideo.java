@@ -10,13 +10,13 @@ import atu.testrecorder.exceptions.ATUTestRecorderException;
 
 public class CaptureVideo {
 	ATUTestRecorder recorder;
-	public void captureVideo(String FileName){
+	public void captureVideo(String FileName, String workingDirectory){
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss"); 
 		  Date date = new Date(); 
 		  
 		 //Create directory to save the video
-		  String strDirectoy ="C:\\SeleniumScriptVideos\\";
+		  String strDirectoy =workingDirectory+"\\TestExecutionVideos";
 		  try{
 		  					  
 			// Create one directory
@@ -35,6 +35,7 @@ public class CaptureVideo {
 		  //Provide directory path to store videos i first parameter,file name in second parameter and true/false in third parameter-false as third parameter for the constructor the audio recording will be disabled. 
 		  try {
 			  		recorder = new ATUTestRecorder(strDirectoy,"TestVideo-TestCase-"+FileName+"-DateTime-"+dateFormat.format(date),false);
+			  		System.out.println("Test Execution video will be saved in :Directory: " + strDirectoy);
 		  		} 
 		  catch (ATUTestRecorderException e) {
 			
