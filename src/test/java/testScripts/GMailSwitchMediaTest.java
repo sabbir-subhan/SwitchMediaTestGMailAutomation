@@ -2,6 +2,7 @@ package testScripts;
 
 import org.testng.annotations.Test;
 
+import supportClasses.AutoITWindowsGUIAutomationFileUpload;
 import supportClasses.CaptureVideo;
 import supportClasses.HighlightElement;
 
@@ -218,14 +219,9 @@ public class GMailSwitchMediaTest {
 	  /*------AutoIT script will handle window AutoMantion
 	   * https://www.autoitscript.com
 	   */
-	  try {
-		Runtime.getRuntime().exec("ChromeFileUploadAutoITScript.exe");
-	  } catch (IOException e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-		System.out.println("AutoIT Windows automtion failed");
-	}
-	  
+	  String AutoITFileName="ChromeFileUploadAutoITScript.exe";//should be in the project path
+	  AutoITWindowsGUIAutomationFileUpload runAutoITFileUploadScript=new AutoITWindowsGUIAutomationFileUpload();
+	  runAutoITFileUploadScript.AutoITWindowsGUIAutomationFileUpload(AutoITFileName);
 	  //sleep--wait for upload to finish
 	  try {
 		Thread.sleep(10000);
