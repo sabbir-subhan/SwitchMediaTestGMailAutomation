@@ -5,8 +5,8 @@ import org.testng.annotations.Test;
 import supportClasses.AutoITWindowsGUIAutomationFileUpload;
 import supportClasses.CaptureVideo;
 import supportClasses.HighlightElement;
+import supportClasses.WebEventListener;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +16,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -37,13 +38,17 @@ public class GMailSwitchMediaTest {
 		
 	/*----End of variable section----*/
 	
-	//Creating Webdriver object
-	public WebDriver driver;
+;
 	
 	//First we instantiate an object of CaptureVidep class
  	CaptureVideo captureTestExecution=new CaptureVideo();
  	
 	Instant start = Instant.now();
+	
+	//Creating Webdriver object
+	private WebDriver Chromedriver;
+	private WebEventListener eventListener;
+	private EventFiringWebDriver driver;
 
 	  @BeforeClass
 	  
@@ -69,7 +74,16 @@ public class GMailSwitchMediaTest {
 		// Optional, if not specified, WebDriver will search your path for chromedriver.
 		  System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 
-		  driver = new ChromeDriver();
+		  Chromedriver = new ChromeDriver();
+		  
+			// Initializing EventFiringWebDriver using Chrome WebDriver instance
+			driver = new EventFiringWebDriver(Chromedriver);
+
+			// Now create object of EventListerHandler to register it with EventFiringWebDriver
+			eventListener = new WebEventListener();
+
+			driver.register(eventListener);
+			
 		  //Add 40 secs implicit wait for each web elements
 		  driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		  //Add 60 secs for all page load
